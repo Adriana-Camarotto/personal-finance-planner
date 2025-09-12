@@ -4,6 +4,7 @@ import AppRoutes from "./Routes";
 import Header from "./layout/Header";
 // import Footer from './layout/Footer';
 import theme from "./Theme";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 const App = () => {
   const fulltheme = createTheme(theme);
@@ -40,15 +41,17 @@ const App = () => {
 
   return (
     <>
-      <ThemeProvider theme={fulltheme}>
-        <Header />
-        <AppRoutes
-          savedReports={savedReports}
-          deleteReport={deleteReport}
-          duplicateReport={duplicateReport}
-          saveReport={saveReport}
-        />
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider theme={fulltheme}>
+          <Header />
+          <AppRoutes
+            savedReports={savedReports}
+            deleteReport={deleteReport}
+            duplicateReport={duplicateReport}
+            saveReport={saveReport}
+          />
+        </ThemeProvider>
+      </LanguageProvider>
       {/* <Footer /> */}
     </>
   );

@@ -2,8 +2,13 @@ import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import ParticlesComponent from "../reusabel/Particles";
+import { useLanguage } from "../contexts/LanguageContext";
+import { useTranslation } from "../utils/translations";
 
 const Home = () => {
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
+
   return (
     <div>
       <Box
@@ -18,10 +23,10 @@ const Home = () => {
           variant="h2"
           sx={{ m: "2rem 0", color: "dark blue", fontWeight: 800 }}
         >
-          Bem vindo!
+          {t("home.welcome")}
         </Typography>
         <Typography variant="h1" sx={{ mb: "2rem", color: "dark blue" }}>
-          Planejamento Financeiro 2025
+          {t("header.title")} 2025
         </Typography>
         <Box sx={{ padding: 2, backgroundColor: "primary", color: "white" }}>
           <Link to="/new-relatorio" style={{ textDecoration: "none" }}>
@@ -29,7 +34,7 @@ const Home = () => {
               variant="contained"
               sx={{ backgroundColor: "white", color: "black" }}
             >
-              Crie seu Planejamento Financeiro
+              {t("savedReports.createNew")}
             </Button>
           </Link>
         </Box>

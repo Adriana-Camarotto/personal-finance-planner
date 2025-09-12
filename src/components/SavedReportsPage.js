@@ -3,21 +3,26 @@ import { Link } from "react-router-dom";
 import { Container, Box, Typography, Button } from "@mui/material";
 import ParticlesCursor from "../reusabel/ParticlesCursor";
 import { Grid } from "@mui/system";
+import { useLanguage } from "../contexts/LanguageContext";
+import { useTranslation } from "../utils/translations";
 
 const SavedReportsPage = ({
   savedReports = [],
   deleteReport,
   duplicateReport,
 }) => {
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
+
   return (
     <Container>
       <Box sx={{ textAlign: "center", marginTop: 4 }}>
         <Typography variant="h1" sx={{ m: "2rem 0 3rem" }}>
-          Relatórios Salvos
+          {t("savedReports.title")}
         </Typography>
         <Box sx={{ marginTop: 4 }}>
           {savedReports.length === 0 ? (
-            <Typography variant="h6">Nenhum relatório salvo.</Typography>
+            <Typography variant="h6">{t("savedReports.noReports")}</Typography>
           ) : (
             <Grid container justifyContent="center" spacing={1}>
               {savedReports.map((report) => (
@@ -45,7 +50,7 @@ const SavedReportsPage = ({
                     <Typography variant="h6">
                       {report.month && report.year
                         ? `${report.month} ${report.year}`
-                        : "Relatório"}
+                        : t("savedReports.reportTitle")}
                     </Typography>
                   </Link>
                   <Box sx={{ display: "flex", gap: 2 }}>
@@ -54,14 +59,14 @@ const SavedReportsPage = ({
                       color="secondary"
                       onClick={() => deleteReport(report.id)}
                     >
-                      Deletar
+                      {t("savedReports.delete")}
                     </Button>
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={() => duplicateReport(report.id)}
                     >
-                      Duplicar
+                      {t("savedReports.duplicate")}
                     </Button>
                   </Box>
                 </Box>
@@ -91,7 +96,7 @@ const SavedReportsPage = ({
             },
           }}
         >
-          Crie um novo relatiorio
+          {t("savedReports.createNew")}
         </Button>
       </Link>
 

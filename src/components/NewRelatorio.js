@@ -16,8 +16,13 @@ import IncomeForm from "./IncomeForm";
 import ExpenseForm from "./ExpenseForm";
 import Grid from "@mui/material/Grid2";
 import ParticlesConfetti from "../reusabel/ParticlesConfetti";
+import { useLanguage } from "../contexts/LanguageContext";
+import { useTranslation } from "../utils/translations";
 
 const NewRelatorio = ({ saveReport }) => {
+  const { language } = useLanguage();
+  const { t } = useTranslation(language);
+
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [income, setIncome] = useState([]);
@@ -118,6 +123,21 @@ const NewRelatorio = ({ saveReport }) => {
   const totalExpenses = expenses.reduce((acc, item) => acc + item.amount, 0);
   const totalGeneral = totalIncome - totalExpenses;
 
+  const monthsArray = [
+    { key: "janeiro", value: t("months.janeiro") },
+    { key: "fevereiro", value: t("months.fevereiro") },
+    { key: "março", value: t("months.março") },
+    { key: "abril", value: t("months.abril") },
+    { key: "maio", value: t("months.maio") },
+    { key: "junho", value: t("months.junho") },
+    { key: "julho", value: t("months.julho") },
+    { key: "agosto", value: t("months.agosto") },
+    { key: "setembro", value: t("months.setembro") },
+    { key: "outubro", value: t("months.outubro") },
+    { key: "novembro", value: t("months.novembro") },
+    { key: "dezembro", value: t("months.dezembro") },
+  ];
+
   return (
     <div>
       <Box
@@ -129,42 +149,33 @@ const NewRelatorio = ({ saveReport }) => {
         }}
       >
         <Typography variant="h1" sx={{ m: "2rem 0" }}>
-          Planejamento Financeiro
+          {t("newReport.title")}
         </Typography>
         <Typography variant="h5" sx={{ mb: "1rem" }}>
-          Adicione o periodo{" "}
+          {t("newReport.addPeriod")}
         </Typography>
         <Box sx={{ display: "flex", gap: 2 }}>
           <FormControl sx={{ width: "150px" }}>
-            <InputLabel id="month-select-label">Mês</InputLabel>
+            <InputLabel id="month-select-label">
+              {t("newReport.month")}
+            </InputLabel>
             <Select
               labelId="month-select-label"
               value={month}
               required
               onChange={handleMonthChange}
             >
-              {[
-                "Janeiro",
-                "Fevereiro",
-                "Março",
-                "Abril",
-                "Maio",
-                "Junho",
-                "Julho",
-                "Agosto",
-                "Setembro",
-                "Outubro",
-                "Novembro",
-                "Dezembro",
-              ].map((month, index) => (
-                <MenuItem key={index} value={month}>
-                  {month}
+              {monthsArray.map((monthItem, index) => (
+                <MenuItem key={index} value={monthItem.value}>
+                  {monthItem.value}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
           <FormControl sx={{ width: "150px" }}>
-            <InputLabel id="year-select-label">Ano</InputLabel>
+            <InputLabel id="year-select-label">
+              {t("newReport.year")}
+            </InputLabel>
             <Select
               labelId="year-select-label"
               value={year}
@@ -194,7 +205,7 @@ const NewRelatorio = ({ saveReport }) => {
                 boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
               }}
             >
-              <Typography variant="h6">Adicionar Entrada</Typography>
+              <Typography variant="h6">{t("newReport.addIncome")}</Typography>
               <IncomeForm addIncome={addIncome} />
             </Box>
 
@@ -207,7 +218,7 @@ const NewRelatorio = ({ saveReport }) => {
                 boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
               }}
             >
-              <Typography variant="h6">Adicionar Despesa</Typography>
+              <Typography variant="h6">{t("newReport.addExpense")}</Typography>
               <ExpenseForm addExpense={addExpense} />
             </Box>
           </Grid>
@@ -222,7 +233,7 @@ const NewRelatorio = ({ saveReport }) => {
                 boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
                 textAlign: "center",
               }}
-            >{`Relatório de ${month} ${year}`}</Typography>
+            >{`${t("newReport.reportOf")} ${month} ${year}`}</Typography>
             <Typography
               variant="h5"
               sx={{
@@ -232,7 +243,7 @@ const NewRelatorio = ({ saveReport }) => {
                 boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
               }}
             >
-              Entradas
+              {t("newReport.income")}
             </Typography>
             <Relatorio
               items={income}
@@ -250,7 +261,7 @@ const NewRelatorio = ({ saveReport }) => {
                 boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
               }}
             >
-              Despesas
+              {t("newReport.expenses")}
             </Typography>
             <div>
               <Relatorio
@@ -270,20 +281,20 @@ const NewRelatorio = ({ saveReport }) => {
                 boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
               }}
             >
-              <Typography variant="h5">Resumo</Typography>
+              <Typography variant="h5">{t("newReport.summary")}</Typography>
               <Typography variant="body1">
-                Total de Entradas: £ {totalIncome.toFixed(2)}
+                {t("newReport.totalIncome")}: £ {totalIncome.toFixed(2)}
               </Typography>
               <Typography variant="body1">
-                Total de Despesas: £ {totalExpenses.toFixed(2)}
+                {t("newReport.totalExpenses")}: £ {totalExpenses.toFixed(2)}
               </Typography>
               <Typography variant="body1">
-                Total Geral: £ {totalGeneral.toFixed(2)}
+                {t("newReport.totalGeneral")}: £ {totalGeneral.toFixed(2)}
               </Typography>
             </Box>
             <Box sx={{ mt: 2 }}>
               <Button variant="contained" onClick={handleSaveReport}>
-                Salvar Relatório
+                {t("newReport.saveReport")}
               </Button>
               <Snackbar
                 open={openSnackbar}
@@ -302,7 +313,7 @@ const NewRelatorio = ({ saveReport }) => {
                     left: 600,
                   }}
                 >
-                  Relatório salvo com sucesso!
+                  {t("newReport.reportSaved")}
                 </Alert>
               </Snackbar>
             </Box>
