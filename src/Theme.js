@@ -1,5 +1,3 @@
-import shadows from "@mui/material/styles/shadows";
-
 const theme = {
     global: {
         container: "xl",

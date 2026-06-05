@@ -5,9 +5,10 @@ import IncomeForm from './IncomeForm';
 import ExpenseForm from './ExpenseForm';
 import Grid from "@mui/material/Grid2";
 import ParticlesConfetti from "../reusabel/ParticlesConfetti";
+import { t, getMonthOptions, getMonthLabel } from '../i18n';
 
 
-const NewRelatorio = () => {
+const NewRelatorio = ({ language = 'en' }) => {
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
     const [income, setIncome] = useState([]);
@@ -115,26 +116,26 @@ const NewRelatorio = () => {
     return (
         <div>
             <Box sx={{ mb: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="h1" sx={{ m: '2rem 0' }}>Planejamento Financeiro</Typography>
-                <Typography variant="h5" sx={{ mb: '1rem' }}>Adicione o periodo </Typography>
+                <Typography variant="h1" sx={{ m: '2rem 0' }}>{t(language, 'common.planning')}</Typography>
+                <Typography variant="h5" sx={{ mb: '1rem' }}>{t(language, 'common.addPeriod')}</Typography>
                 <Box sx={{ display: 'flex', gap: 2 }}>
                     <FormControl sx={{ width: '150px' }}>
-                        <InputLabel id="month-select-label">Mês</InputLabel>
+                        <InputLabel id="month-select-label">{t(language, 'common.month')}</InputLabel>
                         <Select
                             labelId="month-select-label"
                             value={month}
                             required
                             onChange={handleMonthChange}
                         >
-                            {['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'].map((month, index) => (
-                                <MenuItem key={index} value={month}>
-                                    {month}
+                            {getMonthOptions(language).map((monthOption) => (
+                                <MenuItem key={monthOption.value} value={monthOption.value}>
+                                    {monthOption.label}
                                 </MenuItem>
                             ))}
                         </Select>
                     </FormControl>
                     <FormControl sx={{ width: '150px' }}>
-                        <InputLabel id="year-select-label">Ano</InputLabel>
+                        <InputLabel id="year-select-label">{t(language, 'common.year')}</InputLabel>
                         <Select
                             labelId="year-select-label"
                             value={year}
@@ -154,45 +155,47 @@ const NewRelatorio = () => {
                 <Grid container spacing={4} sx={{ justifyContent: 'center' }}>
                     <Grid size={{ xs: 12, md: 3 }}>
                         <Box sx={{ mt: 4, backgroundColor: 'Lightgray', padding: '20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
-                            <Typography variant="h6">Adicionar Entrada</Typography>
-                            <IncomeForm addIncome={addIncome} />
+                            <Typography variant="h6">{t(language, 'common.addIncome')}</Typography>
+                            <IncomeForm addIncome={addIncome} language={language} />
                         </Box>
 
                         <Box sx={{ mt: 4, backgroundColor: 'Lightgray', padding: '20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
-                            <Typography variant="h6">Adicionar Despesa</Typography>
-                            <ExpenseForm addExpense={addExpense} />
+                            <Typography variant="h6">{t(language, 'common.addExpense')}</Typography>
+                            <ExpenseForm addExpense={addExpense} language={language} />
                         </Box>
                     </Grid>
                     <Grid size={{ xs: 12, md: 9 }}>
-                        <Typography variant="h4" sx={{ m: '30px 0', backgroundColor: 'Lightgray', padding: '20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', textAlign: 'center' }}>{`Relatório de ${month} ${year}`}</Typography>
-                        <Typography variant="h5" sx={{ mb: 2, padding: '10px 20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Entradas</Typography>
+                        <Typography variant="h4" sx={{ m: '30px 0', backgroundColor: 'Lightgray', padding: '20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', textAlign: 'center' }}>{`${t(language, 'common.reportOf')} ${getMonthLabel(month, language)} ${year}`}</Typography>
+                        <Typography variant="h5" sx={{ mb: 2, padding: '10px 20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>{t(language, 'common.income')}</Typography>
                         <Relatorio
                             items={income}
                             deleteItem={deleteIncome}
                             togglePaidStatus={togglePaidStatusIncome}
                             showTotal
+                            language={language}
                         />
-                        <Typography variant="h5" sx={{ mb: 2, mt: 4, padding: '10px 20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>Despesas</Typography>
+                        <Typography variant="h5" sx={{ mb: 2, mt: 4, padding: '10px 20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>{t(language, 'common.expenses')}</Typography>
                         <div>
                             <Relatorio
                                 items={expenses}
                                 deleteItem={deleteExpense}
                                 togglePaidStatus={togglePaidStatusExpense}
                                 showTotal
+                                language={language}
                             />
                             {showConfetti && <ParticlesConfetti />}
                         </div>
                         <Box sx={{ mt: 4, backgroundColor: 'Lightgray', padding: '20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
-                            <Typography variant="h5">Resumo</Typography>
-                            <Typography variant="body1">Total de Entradas: £ {totalIncome.toFixed(2)}</Typography>
-                            <Typography variant="body1">Total de Despesas: £ {totalExpenses.toFixed(2)}</Typography>
-                            <Typography variant="body1">Total Geral: £ {totalGeneral.toFixed(2)}</Typography>
+                            <Typography variant="h5">{t(language, 'common.summary')}</Typography>
+                            <Typography variant="body1">{`${t(language, 'common.totalIncome')}: £ ${totalIncome.toFixed(2)}`}</Typography>
+                            <Typography variant="body1">{`${t(language, 'common.totalExpenses')}: £ ${totalExpenses.toFixed(2)}`}</Typography>
+                            <Typography variant="body1">{`${t(language, 'common.totalGeneral')}: £ ${totalGeneral.toFixed(2)}`}</Typography>
                         </Box>
                         <Box sx={{ mt: 2 }}>
-                            <Button variant="contained" onClick={saveReport}>Salvar Relatório</Button>
+                            <Button variant="contained" onClick={saveReport}>{t(language, 'common.saveReport')}</Button>
                             <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
                                 <Alert onClose={handleCloseSnackbar} severity="success" style={{ width: '100%', backgroundColor: 'green', color: 'white', position: 'relative', bottom: 100, left: 600 }}>
-                                    Relatório salvo com sucesso!
+                                    {t(language, 'common.reportSaved')}
                                 </Alert>
                             </Snackbar>
                         </Box>

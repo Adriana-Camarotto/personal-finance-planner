@@ -11,6 +11,7 @@ import theme from './Theme';
 const App = () => {
 
   const fulltheme = createTheme(theme);
+  const [language, setLanguage] = useState(() => localStorage.getItem('language') || 'en');
 
   const [savedReports, setSavedReports] = useState(() => {
     const saved = localStorage.getItem('savedReports');
@@ -20,6 +21,10 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('savedReports', JSON.stringify(savedReports));
   }, [savedReports]);
+
+  useEffect(() => {
+    localStorage.setItem('language', language);
+  }, [language]);
 
   const deleteReport = (id) => {
     const updatedReports = savedReports.filter(report => report.id !== id);
@@ -40,11 +45,12 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={fulltheme}>
-        <Header />
+        <Header language={language} onLanguageChange={setLanguage} />
         <AppRoutes
           savedReports={savedReports}
           deleteReport={deleteReport}
           duplicateReport={duplicateReport}
+          language={language}
         />
       </ThemeProvider>
       {/* <Footer /> */}

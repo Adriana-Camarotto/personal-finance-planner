@@ -8,24 +8,10 @@ import Grid from "@mui/material/Grid2";
 import ParticlesConfetti from "../reusabel/ParticlesConfetti";
 
 import MonthlyExpensesChart from "./MonthlyExpensesChart";
-
-const expensesData = {
-    Janeiro: 500,
-    Fevereiro: 700,
-    Março: 450,
-    Abril: 600,
-    Maio: 800,
-    Junho: 550,
-    Julho: 620,
-    Agosto: 700,
-    Setembro: 500,
-    Outubro: 720,
-    Novembro: 480,
-    Dezembro: 650
-};
+import { t, getMonthLabel } from '../i18n';
 
 
-const SavedReport = () => {
+const SavedReport = ({ language = 'en' }) => {
     const { id } = useParams();
     const [report, setReport] = useState(null);
     const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -63,7 +49,7 @@ const SavedReport = () => {
     };
 
     if (!report) {
-        return <Typography>Relatório não encontrado</Typography>;
+        return <Typography>{t(language, 'common.reportNotFound')}</Typography>;
     }
 
     const addIncome = (entry) => {
@@ -117,64 +103,66 @@ const SavedReport = () => {
     };
 
 
-    const totalIncome = report.income.reduce((acc, item) => acc + item.amount, 0);
-    const totalExpenses = report.expenses.reduce((acc, item) => acc + item.amount, 0);
+    const totalIncome = report.income.reduce((acc, item) => acc + Number(item.amount || 0), 0);
+    const totalExpenses = report.expenses.reduce((acc, item) => acc + Number(item.amount || 0), 0);
     const totalGeneral = totalIncome - totalExpenses;
+    const savedReports = JSON.parse(localStorage.getItem('savedReports')) || [];
 
     return (
         <Container sx={{ mt: 4 }}>
 
-            <Typography variant="h1" sx={{ m: '30px 0', textAlign: 'center' }}>{`Relatório de ${report.month} ${report.year}`}</Typography>
+            <Typography variant="h1" sx={{ m: '30px 0', textAlign: 'center' }}>{`${t(language, 'common.reportOf')} ${getMonthLabel(report.month, language)} ${report.year}`}</Typography>
             <Grid container spacing={4} sx={{ justifyContent: 'center' }}>
                 <Grid size={{ xs: 12, md: 3 }}>
                     <Box sx={{ mt: 4, backgroundColor: 'Lightgray', padding: '20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
-                        <Typography variant="h6">Adicionar Entrada</Typography>
-                        <IncomeForm addIncome={addIncome} />
+                        <Typography variant="h6">{t(language, 'common.addIncome')}</Typography>
+                        <IncomeForm addIncome={addIncome} language={language} />
                     </Box>
 
                     <Box sx={{ mt: 4, backgroundColor: 'Lightgray', padding: '20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
-                        <Typography variant="h6">Adicionar Despesa</Typography>
-                        <ExpenseForm addExpense={addExpense} />
+                        <Typography variant="h6">{t(language, 'common.addExpense')}</Typography>
+                        <ExpenseForm addExpense={addExpense} language={language} />
                     </Box>
                 </Grid>
 
                 <Grid size={{ xs: 12, md: 9 }}>
-                    {/* <Typography variant="h4" sx={{ m: '30px 0', backgroundColor: 'Lightgray', padding: '20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', textAlign: 'center' }}>{`Relatório de ${report.month} ${report.year}`}</Typography> */}
-                    <Typography variant="h5" sx={{ m: '30px 0 15px 0', padding: '10px 20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', backgroundColor: 'gray', color: 'white' }}>Entradas</Typography>
+                    <Typography variant="h5" sx={{ m: '30px 0 15px 0', padding: '10px 20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', backgroundColor: 'gray', color: 'white' }}>{t(language, 'common.income')}</Typography>
                     <div>
                         <Relatorio
                             items={report.income}
                             deleteItem={deleteIncome}
                             togglePaidStatus={togglePaidStatusIncome}
                             showTotal
+                            language={language}
                         />
                         {showConfetti && <ParticlesConfetti />}
                     </div>
-                    <Typography variant="h5" sx={{ m: '30px 0 15px 0', padding: '10px 20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', backgroundColor: 'gray', color: 'white' }}>Despesas</Typography>
+                    <Typography variant="h5" sx={{ m: '30px 0 15px 0', padding: '10px 20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)', backgroundColor: 'gray', color: 'white' }}>{t(language, 'common.expenses')}</Typography>
                     <div>
                         <Relatorio
                             items={report.expenses}
                             deleteItem={deleteExpense}
                             togglePaidStatus={togglePaidStatusExpense}
                             showTotal
+                            language={language}
                         />
                         {showConfetti && <ParticlesConfetti />}
                     </div>
                     <Box sx={{ mt: 4, backgroundColor: 'Lightgray', padding: '20px', borderRadius: '4px', boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)' }}>
-                        <Typography variant="h5">Resumo</Typography>
-                        <Typography variant="body1">Total de Entradas: £ {totalIncome.toFixed(2)}</Typography>
-                        <Typography variant="body1">Total de Despesas: £ {totalExpenses.toFixed(2)}</Typography>
-                        <Typography variant="body1">Total Geral: £ {totalGeneral.toFixed(2)}</Typography>
+                        <Typography variant="h5">{t(language, 'common.summary')}</Typography>
+                        <Typography variant="body1">{`${t(language, 'common.totalIncome')}: £ ${totalIncome.toFixed(2)}`}</Typography>
+                        <Typography variant="body1">{`${t(language, 'common.totalExpenses')}: £ ${totalExpenses.toFixed(2)}`}</Typography>
+                        <Typography variant="body1">{`${t(language, 'common.totalGeneral')}: £ ${totalGeneral.toFixed(2)}`}</Typography>
                     </Box>
                     <Box sx={{ mt: 2 }}>
-                        <Button variant="contained" onClick={saveReport}>Salvar Relatório</Button>
+                        <Button variant="contained" onClick={saveReport}>{t(language, 'common.saveReport')}</Button>
                         <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
                             <Alert onClose={handleCloseSnackbar} severity="success" style={{ width: '100%', backgroundColor: 'green', color: 'white', position: 'relative', bottom: 100, left: 600 }}>
-                                Relatório salvo com sucesso!
+                                {t(language, 'common.reportSaved')}
                             </Alert>
                         </Snackbar>
                     </Box>
-                    <MonthlyExpensesChart data={expensesData} />
+                    <MonthlyExpensesChart report={report} savedReports={savedReports} language={language} />
                 </Grid>
 
             </Grid>

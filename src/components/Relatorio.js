@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { t } from '../i18n';
 
-const Relatorio = ({ items = [], deleteItem, togglePaidStatus, showTotal }) => {
+const Relatorio = ({ items = [], deleteItem, togglePaidStatus, showTotal, language = 'en' }) => {
   const total = items.reduce((acc, item) => acc + item.amount, 0);
 
 
@@ -13,13 +14,13 @@ const Relatorio = ({ items = [], deleteItem, togglePaidStatus, showTotal }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Descrição</TableCell>
-            <TableCell>Valor (£)</TableCell>
-            <TableCell>Data de Pagamento</TableCell>
-            <TableCell>Data Efetiva</TableCell>
-            <TableCell>Categoria</TableCell>
-            <TableCell>Subcategoria</TableCell>
-            <TableCell>Ações</TableCell>
+            <TableCell>{t(language, 'common.description')}</TableCell>
+            <TableCell>{`${t(language, 'common.amount')} (£)`}</TableCell>
+            <TableCell>{t(language, 'common.paymentDate')}</TableCell>
+            <TableCell>{t(language, 'common.effectiveDate')}</TableCell>
+            <TableCell>{t(language, 'common.category')}</TableCell>
+            <TableCell>{t(language, 'common.subcategory')}</TableCell>
+            <TableCell>{t(language, 'common.actions')}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -30,8 +31,8 @@ const Relatorio = ({ items = [], deleteItem, togglePaidStatus, showTotal }) => {
               <TableCell>£ {item.amount.toFixed(2)}</TableCell>
               <TableCell>{item.paymentDate}</TableCell>
               <TableCell>{item.effectiveDate}</TableCell>
-              <TableCell>{item.category || 'N/A'}</TableCell>
-              <TableCell>{item.subcategory || 'N/A'}</TableCell>
+              <TableCell>{item.category || t(language, 'common.notAvailable')}</TableCell>
+              <TableCell>{item.subcategory || t(language, 'common.notAvailable')}</TableCell>
               <TableCell>
                 <IconButton onClick={() => deleteItem(index)} aria-label="delete">
                   <DeleteOutlineIcon style={{ color: 'red' }} />
@@ -48,7 +49,7 @@ const Relatorio = ({ items = [], deleteItem, togglePaidStatus, showTotal }) => {
           ))}
           {showTotal && (
             <TableRow>
-              <TableCell colSpan={6} align="right"><strong>Total:</strong></TableCell>
+              <TableCell colSpan={6} align="right"><strong>{`${t(language, 'common.total')}:`}</strong></TableCell>
               <TableCell><strong>£ {total.toFixed(2)}</strong></TableCell>
             </TableRow>
           )}
