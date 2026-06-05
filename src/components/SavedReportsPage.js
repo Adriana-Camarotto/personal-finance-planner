@@ -41,7 +41,7 @@ const SavedReportsPage = ({
                     to={`/report/${report.id}`}
                     style={{
                       textDecoration: "none",
-                      color: (theme) => theme.palette.primary.main,
+                      color: "#13234e",
                     }}
                   >
                     <Typography variant="h6">

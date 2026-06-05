@@ -1,12 +1,5 @@
 import React, { useMemo, useState } from "react";
-import {
-  AppBar,
-  Button,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Button, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
 import HomeIcon from "@mui/icons-material/Home";
@@ -37,16 +30,17 @@ const Header = ({ language = "en", onLanguageChange }) => {
     () => ({
       title: t(language, "header.title"),
       savedReports: t(language, "header.savedReports"),
-      language: t(language, "header.language"),
       portugueseBrazil: t(language, "header.portugueseBrazil"),
       english: t(language, "header.english"),
     }),
     [language],
   );
+
   const languageFlag =
     language === "pt-BR"
       ? { src: brazilFlag, alt: "Brazil flag" }
       : { src: ukFlag, alt: "United Kingdom flag" };
+
   const currentLanguageLabel =
     language === "pt-BR" ? labels.portugueseBrazil : labels.english;
 
@@ -82,7 +76,6 @@ const Header = ({ language = "en", onLanguageChange }) => {
             startIcon={<HomeIcon />}
           >
             <Typography variant="h6" component="div">
-              {" "}
               {labels.title}
             </Typography>
           </Button>
@@ -100,10 +93,7 @@ const Header = ({ language = "en", onLanguageChange }) => {
           }}
         >
           <Link to="/saved-reports" style={{ textDecoration: "none" }}>
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "white", color: "black" }}
-            >
+            <Button variant="contained" sx={{ backgroundColor: "white", color: "black" }}>
               {labels.savedReports}
             </Button>
           </Link>
@@ -118,11 +108,8 @@ const Header = ({ language = "en", onLanguageChange }) => {
               <span>{currentLanguageLabel}</span>
             </Box>
           </Button>
-          <Menu
-            anchorEl={anchorEl}
-            open={menuOpen}
-            onClose={handleCloseLanguageMenu}
-          >
+
+          <Menu anchorEl={anchorEl} open={menuOpen} onClose={handleCloseLanguageMenu}>
             <MenuItem onClick={() => handleLanguageSelect("pt-BR")}>
               <Box sx={{ display: "inline-flex", alignItems: "center" }}>
                 <Flag src={brazilFlag} alt="Brazil flag" />

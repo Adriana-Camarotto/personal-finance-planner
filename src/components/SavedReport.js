@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Container,
-  Typography,
-  Box,
-  Button,
-  Snackbar,
-  Alert,
-} from "@mui/material";
+import { Container, Typography, Box, Button, Snackbar, Alert } from "@mui/material";
 import Relatorio from "./Relatorio";
 import IncomeForm from "./IncomeForm";
 import ExpenseForm from "./ExpenseForm";
 import Grid from "@mui/material/Grid2";
 import ParticlesConfetti from "../reusabel/ParticlesConfetti";
-
 import MonthlyExpensesChart from "./MonthlyExpensesChart";
 import { t, getMonthLabel } from "../i18n";
 
@@ -46,7 +38,7 @@ const SavedReport = ({ language = "en" }) => {
       r.id.toString() === id ? report : r,
     );
     localStorage.setItem("savedReports", JSON.stringify(updatedReports));
-    setOpenSnackbar(true); // Show the snackbar
+    setOpenSnackbar(true);
   };
 
   const handleCloseSnackbar = () => {
@@ -107,23 +99,16 @@ const SavedReport = ({ language = "en" }) => {
     updateReport({ expenses: updatedExpenses });
   };
 
-  const totalIncome = report.income.reduce(
-    (acc, item) => acc + Number(item.amount || 0),
-    0,
-  );
-  const totalExpenses = report.expenses.reduce(
-    (acc, item) => acc + Number(item.amount || 0),
-    0,
-  );
+  const totalIncome = report.income.reduce((acc, item) => acc + Number(item.amount || 0), 0);
+  const totalExpenses = report.expenses.reduce((acc, item) => acc + Number(item.amount || 0), 0);
   const totalGeneral = totalIncome - totalExpenses;
   const savedReports = JSON.parse(localStorage.getItem("savedReports")) || [];
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Typography
-        variant="h1"
-        sx={{ m: "30px 0", textAlign: "center" }}
-      >{`${t(language, "common.reportOf")} ${getMonthLabel(report.month, language)} ${report.year}`}</Typography>
+      <Typography variant="h1" sx={{ m: "30px 0", textAlign: "center" }}>
+        {`${t(language, "common.reportOf")} ${getMonthLabel(report.month, language)} ${report.year}`}
+      </Typography>
       <Grid container spacing={4} sx={{ justifyContent: "center" }}>
         <Grid size={{ xs: 12, md: 3 }}>
           <Box
@@ -135,9 +120,7 @@ const SavedReport = ({ language = "en" }) => {
               boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
             }}
           >
-            <Typography variant="h6">
-              {t(language, "common.addIncome")}
-            </Typography>
+            <Typography variant="h6">{t(language, "common.addIncome")}</Typography>
             <IncomeForm addIncome={addIncome} language={language} />
           </Box>
 
@@ -150,9 +133,7 @@ const SavedReport = ({ language = "en" }) => {
               boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
             }}
           >
-            <Typography variant="h6">
-              {t(language, "common.addExpense")}
-            </Typography>
+            <Typography variant="h6">{t(language, "common.addExpense")}</Typography>
             <ExpenseForm addExpense={addExpense} language={language} />
           </Box>
         </Grid>
@@ -213,9 +194,7 @@ const SavedReport = ({ language = "en" }) => {
               boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
             }}
           >
-            <Typography variant="h5">
-              {t(language, "common.summary")}
-            </Typography>
+            <Typography variant="h5">{t(language, "common.summary")}</Typography>
             <Typography variant="body1">{`${t(language, "common.totalIncome")}: £ ${totalIncome.toFixed(2)}`}</Typography>
             <Typography variant="body1">{`${t(language, "common.totalExpenses")}: £ ${totalExpenses.toFixed(2)}`}</Typography>
             <Typography variant="body1">{`${t(language, "common.totalGeneral")}: £ ${totalGeneral.toFixed(2)}`}</Typography>
@@ -224,11 +203,7 @@ const SavedReport = ({ language = "en" }) => {
             <Button variant="contained" onClick={saveReport}>
               {t(language, "common.saveReport")}
             </Button>
-            <Snackbar
-              open={openSnackbar}
-              autoHideDuration={6000}
-              onClose={handleCloseSnackbar}
-            >
+            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
               <Alert
                 onClose={handleCloseSnackbar}
                 severity="success"
@@ -245,11 +220,7 @@ const SavedReport = ({ language = "en" }) => {
               </Alert>
             </Snackbar>
           </Box>
-          <MonthlyExpensesChart
-            report={report}
-            savedReports={savedReports}
-            language={language}
-          />
+          <MonthlyExpensesChart report={report} savedReports={savedReports} language={language} />
         </Grid>
       </Grid>
     </Container>

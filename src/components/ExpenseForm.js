@@ -133,6 +133,11 @@ const ExpenseForm = ({ addExpense, language = "en" }) => {
               {language === "pt-BR" ? option.labelPt : option.labelEn}
             </MenuItem>
           ))}
+          {SUBCATEGORY_OPTIONS.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {language === "pt-BR" ? option.labelPt : option.labelEn}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
 

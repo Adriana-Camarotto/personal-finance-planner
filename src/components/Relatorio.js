@@ -20,7 +20,7 @@ const Relatorio = ({
   showTotal,
   language = "en",
 }) => {
-  const total = items.reduce((acc, item) => acc + item.amount, 0);
+  const total = items.reduce((acc, item) => acc + Number(item.amount || 0), 0);
 
   return (
     <>
@@ -39,31 +39,18 @@ const Relatorio = ({
           </TableHead>
           <TableBody>
             {items.map((item, index) => (
-              <TableRow
-                key={index}
-                sx={{ backgroundColor: item.paid ? "lightgray" : "white" }}
-              >
+              <TableRow key={index} sx={{ backgroundColor: item.paid ? "lightgray" : "white" }}>
                 <TableCell>{item.description}</TableCell>
-                <TableCell>£ {item.amount.toFixed(2)}</TableCell>
+                <TableCell>£ {Number(item.amount || 0).toFixed(2)}</TableCell>
                 <TableCell>{item.paymentDate}</TableCell>
                 <TableCell>{item.effectiveDate}</TableCell>
+                <TableCell>{item.category || t(language, "common.notAvailable")}</TableCell>
+                <TableCell>{item.subcategory || t(language, "common.notAvailable")}</TableCell>
                 <TableCell>
-                  {item.category || t(language, "common.notAvailable")}
-                </TableCell>
-                <TableCell>
-                  {item.subcategory || t(language, "common.notAvailable")}
-                </TableCell>
-                <TableCell>
-                  <IconButton
-                    onClick={() => deleteItem(index)}
-                    aria-label="delete"
-                  >
+                  <IconButton onClick={() => deleteItem(index)} aria-label="delete">
                     <DeleteOutlineIcon style={{ color: "red" }} />
                   </IconButton>
-                  <IconButton
-                    onClick={() => togglePaidStatus(index)}
-                    aria-label="toggle-paid"
-                  >
+                  <IconButton onClick={() => togglePaidStatus(index)} aria-label="toggle-paid">
                     {item.paid ? (
                       <CheckCircleOutlineIcon style={{ color: "green" }} />
                     ) : (

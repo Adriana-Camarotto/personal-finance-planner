@@ -29,7 +29,7 @@ const IncomeForm = ({ addIncome, language = "en" }) => {
   const handlePaymentDateChange = (e) => {
     const date = e.target.value;
     setPaymentDate(date);
-    setEffectiveDate(date); // Automatically set the effective date to the payment date
+    setEffectiveDate(date);
   };
 
   const handleEffectiveDateChange = (e) => {
