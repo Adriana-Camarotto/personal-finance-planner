@@ -7,15 +7,19 @@ The app lets you register income and expenses, organize entries by category/subc
 ## Screenshots
 
 ### Home Page
+
 ![Home Page](screenshots/01-home.png)
 
 ### Create New Report
+
 ![New Report](screenshots/02-new-report.png)
 
 ### Saved Reports
+
 ![Saved Reports](screenshots/03-saved-reports.png)
 
 ### Report with Data
+
 ![Report with Data](screenshots/04-saved-report.png)
 
 ## Features
