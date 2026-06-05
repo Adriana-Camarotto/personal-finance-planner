@@ -22,7 +22,10 @@ const Home = ({ language = "en" }) => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h2" sx={{ m: "2rem 0", color: "primary.main", fontWeight: 800 }}>
+        <Typography
+          variant="h2"
+          sx={{ m: "2rem 0", color: "primary.main", fontWeight: 800 }}
+        >
           {labels.welcome}
         </Typography>
         <Typography variant="h1" sx={{ mb: "2rem", color: "primary.main" }}>
@@ -30,7 +33,10 @@ const Home = ({ language = "en" }) => {
         </Typography>
         <Box sx={{ padding: 2, backgroundColor: "primary", color: "white" }}>
           <Link to="/new-relatorio" style={{ textDecoration: "none" }}>
-            <Button variant="contained" sx={{ backgroundColor: "white", color: "primary.main" }}>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "white", color: "primary.main" }}
+            >
               {labels.createPlanning}
             </Button>
           </Link>

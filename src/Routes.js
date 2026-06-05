@@ -15,7 +15,10 @@ const AppRoutes = ({
 }) => (
   <Routes>
     <Route path="/" element={<Home language={language} />} />
-    <Route path="/new-relatorio" element={<NewRelatorio language={language} />} />
+    <Route
+      path="/new-relatorio"
+      element={<NewRelatorio language={language} />}
+    />
     <Route
       path="/saved-reports"
       element={
@@ -27,7 +30,10 @@ const AppRoutes = ({
         />
       }
     />
-    <Route path="/privacy-policy" element={<PrivacyPolicy language={language} />} />
+    <Route
+      path="/privacy-policy"
+      element={<PrivacyPolicy language={language} />}
+    />
     <Route path="/report/:id" element={<SavedReport language={language} />} />
     <Route path="*" element={<NotFoundPage language={language} />} />
   </Routes>

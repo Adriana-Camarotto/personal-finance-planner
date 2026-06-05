@@ -122,7 +122,14 @@ const NewRelatorio = ({ language = "en" }) => {
 
   return (
     <div>
-      <Box sx={{ mb: 4, display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Box
+        sx={{
+          mb: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h1" sx={{ m: "2rem 0" }}>
           {t(language, "common.planning")}
         </Typography>
@@ -131,8 +138,15 @@ const NewRelatorio = ({ language = "en" }) => {
         </Typography>
         <Box sx={{ display: "flex", gap: 2 }}>
           <FormControl sx={{ width: "150px" }}>
-            <InputLabel id="month-select-label">{t(language, "common.month")}</InputLabel>
-            <Select labelId="month-select-label" value={month} required onChange={handleMonthChange}>
+            <InputLabel id="month-select-label">
+              {t(language, "common.month")}
+            </InputLabel>
+            <Select
+              labelId="month-select-label"
+              value={month}
+              required
+              onChange={handleMonthChange}
+            >
               {getMonthOptions(language).map((monthOption) => (
                 <MenuItem key={monthOption.value} value={monthOption.value}>
                   {monthOption.label}
@@ -141,13 +155,22 @@ const NewRelatorio = ({ language = "en" }) => {
             </Select>
           </FormControl>
           <FormControl sx={{ width: "150px" }}>
-            <InputLabel id="year-select-label">{t(language, "common.year")}</InputLabel>
-            <Select labelId="year-select-label" value={year} required onChange={handleYearChange}>
-              {["2024", "2025", "2026", "2027", "2028", "2029", "2030"].map((item, index) => (
-                <MenuItem key={index} value={item}>
-                  {item}
-                </MenuItem>
-              ))}
+            <InputLabel id="year-select-label">
+              {t(language, "common.year")}
+            </InputLabel>
+            <Select
+              labelId="year-select-label"
+              value={year}
+              required
+              onChange={handleYearChange}
+            >
+              {["2024", "2025", "2026", "2027", "2028", "2029", "2030"].map(
+                (item, index) => (
+                  <MenuItem key={index} value={item}>
+                    {item}
+                  </MenuItem>
+                ),
+              )}
             </Select>
           </FormControl>
         </Box>
@@ -164,7 +187,9 @@ const NewRelatorio = ({ language = "en" }) => {
                 boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
               }}
             >
-              <Typography variant="h6">{t(language, "common.addIncome")}</Typography>
+              <Typography variant="h6">
+                {t(language, "common.addIncome")}
+              </Typography>
               <IncomeForm addIncome={addIncome} language={language} />
             </Box>
 
@@ -177,7 +202,9 @@ const NewRelatorio = ({ language = "en" }) => {
                 boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
               }}
             >
-              <Typography variant="h6">{t(language, "common.addExpense")}</Typography>
+              <Typography variant="h6">
+                {t(language, "common.addExpense")}
+              </Typography>
               <ExpenseForm addExpense={addExpense} language={language} />
             </Box>
           </Grid>
@@ -242,7 +269,9 @@ const NewRelatorio = ({ language = "en" }) => {
                 boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
               }}
             >
-              <Typography variant="h5">{t(language, "common.summary")}</Typography>
+              <Typography variant="h5">
+                {t(language, "common.summary")}
+              </Typography>
               <Typography variant="body1">{`${t(language, "common.totalIncome")}: £ ${totalIncome.toFixed(2)}`}</Typography>
               <Typography variant="body1">{`${t(language, "common.totalExpenses")}: £ ${totalExpenses.toFixed(2)}`}</Typography>
               <Typography variant="body1">{`${t(language, "common.totalGeneral")}: £ ${totalGeneral.toFixed(2)}`}</Typography>
@@ -251,7 +280,11 @@ const NewRelatorio = ({ language = "en" }) => {
               <Button variant="contained" onClick={saveReport}>
                 {t(language, "common.saveReport")}
               </Button>
-              <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+              <Snackbar
+                open={openSnackbar}
+                autoHideDuration={6000}
+                onClose={handleCloseSnackbar}
+              >
                 <Alert
                   onClose={handleCloseSnackbar}
                   severity="success"
