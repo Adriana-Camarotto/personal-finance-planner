@@ -5,7 +5,14 @@ import { t } from "../i18n";
 
 const NotFoundPage = ({ language = "en" }) => (
   <Container maxWidth="sm" sx={{ mt: 8 }}>
-    <Box sx={{ textAlign: "center", p: 4, backgroundColor: "#f7f7f7", borderRadius: 2 }}>
+    <Box
+      sx={{
+        textAlign: "center",
+        p: 4,
+        backgroundColor: "#f7f7f7",
+        borderRadius: 2,
+      }}
+    >
       <Typography variant="h2" sx={{ mb: 2 }}>
         404
       </Typography>

@@ -2,9 +2,9 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadFull } from "tsparticles";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-
 function ParticlesConfetti({ position }) {
-  const containerRef = useRef(null), [init, setInit] = useState(false);
+  const containerRef = useRef(null),
+    [init, setInit] = useState(false);
 
   useEffect(() => {
     if (init) {
@@ -157,7 +157,6 @@ function ParticlesConfetti({ position }) {
 
   return (
     <div>
-
       {init && (
         <Particles
           id="tsparticles"

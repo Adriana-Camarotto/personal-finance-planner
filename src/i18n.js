@@ -280,8 +280,7 @@ export const translations = {
       backToHome: "Back to Home",
       privacyTitle: "Privacy Policy",
       privacyLastUpdated: "Last updated",
-      privacyIntro:
-        "This app stores financial data only in your browser.",
+      privacyIntro: "This app stores financial data only in your browser.",
       privacyStoredData: "Data stored locally",
       privacyStoredDataText:
         "savedReports, income, expenses, and language are saved in browser LocalStorage.",

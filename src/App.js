@@ -40,7 +40,9 @@ const App = () => {
   return (
     <>
       <ThemeProvider theme={fulltheme}>
-        <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+        <Box
+          sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+        >
           <Header language={language} onLanguageChange={setLanguage} />
           <Box component="main" sx={{ flex: 1 }}>
             <AppRoutes
