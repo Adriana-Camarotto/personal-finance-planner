@@ -4,6 +4,20 @@ Single-page web application for personal financial planning, built with React an
 
 The app lets you register income and expenses, organize entries by category/subcategory, save reports, and analyze results with monthly and yearly charts.
 
+## Screenshots
+
+### Home Page
+![Home Page](screenshots/01-home.png)
+
+### Create New Report
+![New Report](screenshots/02-new-report.png)
+
+### Saved Reports
+![Saved Reports](screenshots/03-saved-reports.png)
+
+### Report with Data
+![Report with Data](screenshots/04-saved-report.png)
+
 ## Features
 
 - Income and expense registration
@@ -63,6 +77,19 @@ npm test -- --watchAll=false
 ### npm run build
 
 Builds the production bundle in the build folder.
+
+## Testing Stack
+
+This project uses:
+
+- Jest (test runner, via react-scripts)
+- React Testing Library (@testing-library/react)
+- jest-dom matchers (@testing-library/jest-dom)
+
+Related files:
+
+- src/App.test.js
+- src/setupTests.js
 
 ## Main Routes
 
