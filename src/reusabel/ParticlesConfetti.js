@@ -1,6 +1,6 @@
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadFull } from "tsparticles";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 
 function ParticlesConfetti({ position }) {

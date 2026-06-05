@@ -63,7 +63,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { Box, Typography } from "@mui/material";
-import { MONTH_KEYS, getMonthLabel, getMonthKey, t } from '../i18n';
+import { MONTH_KEYS, getMonthLabel, getMonthKey, t } from "../i18n";
 
 ChartJS.register(
   CategoryScale,
@@ -71,7 +71,7 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const buildChartOptions = (title) => ({
@@ -90,7 +90,11 @@ const buildChartOptions = (title) => ({
 const sumAmount = (items = []) =>
   items.reduce((acc, item) => acc + Number(item.amount || 0), 0);
 
-const MonthlyExpensesChart = ({ report, savedReports = [], language = 'en' }) => {
+const MonthlyExpensesChart = ({
+  report,
+  savedReports = [],
+  language = "en",
+}) => {
   if (!report) {
     return null;
   }
@@ -101,9 +105,9 @@ const MonthlyExpensesChart = ({ report, savedReports = [], language = 'en' }) =>
 
   const monthlyData = {
     labels: [
-      t(language, 'common.income'),
-      t(language, 'common.expenses'),
-      t(language, 'common.totalGeneral'),
+      t(language, "common.income"),
+      t(language, "common.expenses"),
+      t(language, "common.totalGeneral"),
     ],
     datasets: [
       {
@@ -124,7 +128,7 @@ const MonthlyExpensesChart = ({ report, savedReports = [], language = 'en' }) =>
   }, {});
 
   const yearReports = savedReports.filter(
-    (savedReport) => String(savedReport.year) === String(report.year)
+    (savedReport) => String(savedReport.year) === String(report.year),
   );
 
   const yearSummary = yearReports.reduce((acc, savedReport) => {
@@ -142,12 +146,12 @@ const MonthlyExpensesChart = ({ report, savedReports = [], language = 'en' }) =>
     labels: MONTH_KEYS.map((monthKey) => getMonthLabel(monthKey, language)),
     datasets: [
       {
-        label: t(language, 'common.income'),
+        label: t(language, "common.income"),
         data: MONTH_KEYS.map((month) => yearSummary[month].income),
         backgroundColor: "rgba(19, 35, 78, 0.75)",
       },
       {
-        label: t(language, 'common.expenses'),
+        label: t(language, "common.expenses"),
         data: MONTH_KEYS.map((month) => yearSummary[month].expenses),
         backgroundColor: "rgba(220, 53, 69, 0.75)",
       },
@@ -157,18 +161,22 @@ const MonthlyExpensesChart = ({ report, savedReports = [], language = 'en' }) =>
   return (
     <Box sx={{ mt: 4 }}>
       <Typography variant="h5" sx={{ mb: 2 }}>
-        {t(language, 'common.monthlyChart')}
+        {t(language, "common.monthlyChart")}
       </Typography>
       <Bar
-        options={buildChartOptions(`${t(language, 'common.monthSummaryOf')} ${getMonthLabel(report.month, language)} ${report.year}`)}
+        options={buildChartOptions(
+          `${t(language, "common.monthSummaryOf")} ${getMonthLabel(report.month, language)} ${report.year}`,
+        )}
         data={monthlyData}
       />
 
       <Typography variant="h5" sx={{ mt: 4, mb: 2 }}>
-        {t(language, 'common.yearlyChart')}
+        {t(language, "common.yearlyChart")}
       </Typography>
       <Bar
-        options={buildChartOptions(`${t(language, 'common.incomeExpensesOfYear')} ${report.year}`)}
+        options={buildChartOptions(
+          `${t(language, "common.incomeExpensesOfYear")} ${report.year}`,
+        )}
         data={yearlyData}
       />
     </Box>

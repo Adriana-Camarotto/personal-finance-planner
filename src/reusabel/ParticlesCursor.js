@@ -540,13 +540,7 @@ const ParticlesComponent = () => {
         }
       }),
       []
-    ),
-    lightTheme = () => {
-      containerRef.current?.loadTheme("light");
-    },
-    darkTheme = () => {
-      containerRef.current?.loadTheme("dark");
-    };
+    );
 
   return (
     <>

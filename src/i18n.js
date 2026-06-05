@@ -118,20 +118,40 @@ export const SUBCATEGORY_OPTIONS = [
   { value: "Brasil", labelPt: "Brasil", labelEn: "Brazil" },
   { value: "Seguro", labelPt: "Seguro", labelEn: "Insurance" },
   { value: "Wells", labelPt: "Custos Wells", labelEn: "Wells costs" },
-  { value: "Bills", labelPt: "Contas (agua, luz, celular, internet)", labelEn: "Bills (water, electricity, mobile, internet)" },
+  {
+    value: "Bills",
+    labelPt: "Contas (agua, luz, celular, internet)",
+    labelEn: "Bills (water, electricity, mobile, internet)",
+  },
   { value: "Carro", labelPt: "Carro", labelEn: "Car" },
   { value: "Academia", labelPt: "Academia", labelEn: "Gym" },
   { value: "Restaurante", labelPt: "Restaurante", labelEn: "Restaurant" },
-  { value: "Transporte Publico", labelPt: "Transporte Publico", labelEn: "Public Transport" },
-  { value: "Impostos e Taxas", labelPt: "Impostos e Taxas", labelEn: "Taxes and Fees" },
+  {
+    value: "Transporte Publico",
+    labelPt: "Transporte Publico",
+    labelEn: "Public Transport",
+  },
+  {
+    value: "Impostos e Taxas",
+    labelPt: "Impostos e Taxas",
+    labelEn: "Taxes and Fees",
+  },
   { value: "Estudos", labelPt: "Estudos", labelEn: "Studies" },
   { value: "Viagem", labelPt: "Viagem", labelEn: "Travel" },
   { value: "Presentes", labelPt: "Presentes", labelEn: "Gifts" },
-  { value: "Roupas", labelPt: "Roupas e calcados", labelEn: "Clothes and Shoes" },
+  {
+    value: "Roupas",
+    labelPt: "Roupas e calcados",
+    labelEn: "Clothes and Shoes",
+  },
   { value: "Saude", labelPt: "Saude", labelEn: "Health" },
   { value: "Casa", labelPt: "Casa", labelEn: "Home" },
   { value: "Lazer", labelPt: "Lazer", labelEn: "Leisure" },
-  { value: "Higiene e Beleza", labelPt: "Higiene e Beleza", labelEn: "Hygiene and Beauty" },
+  {
+    value: "Higiene e Beleza",
+    labelPt: "Higiene e Beleza",
+    labelEn: "Hygiene and Beauty",
+  },
   { value: "Poupanca Geo", labelPt: "Poupanca Geo", labelEn: "Geo Savings" },
   { value: "Savings", labelPt: "Savings", labelEn: "Savings" },
   { value: "Aposentadoria", labelPt: "Aposentadoria", labelEn: "Retirement" },
@@ -146,6 +166,7 @@ export const translations = {
       language: "Idioma",
       portugueseBrazil: "Portugues (Brasil)",
       english: "Ingles",
+      privacyPolicy: "Politica de Privacidade",
     },
     home: {
       welcome: "Bem vindo!",
@@ -189,6 +210,20 @@ export const translations = {
       monthlyIncomeExpense: "Entradas e Saidas Mensais",
       notFoundPage: "404 - Pagina nao encontrada",
       notAvailable: "N/A",
+      backToHome: "Voltar para Home",
+      privacyTitle: "Politica de Privacidade",
+      privacyLastUpdated: "Ultima atualizacao",
+      privacyIntro:
+        "Este aplicativo armazena os dados financeiros somente no seu navegador.",
+      privacyStoredData: "Dados armazenados localmente",
+      privacyStoredDataText:
+        "savedReports, income, expenses e language sao gravados no LocalStorage do navegador.",
+      privacySharing: "Compartilhamento de dados",
+      privacySharingText:
+        "Nao enviamos seus dados para servidor proprio nesta versao do projeto.",
+      privacyResponsibility: "Sua responsabilidade",
+      privacyResponsibilityText:
+        "Se voce usar computador compartilhado, limpe os dados do navegador ao finalizar.",
     },
   },
   en: {
@@ -198,6 +233,7 @@ export const translations = {
       language: "Language",
       portugueseBrazil: "Portuguese (Brazil)",
       english: "English",
+      privacyPolicy: "Privacy Policy",
     },
     home: {
       welcome: "Welcome!",
@@ -241,13 +277,32 @@ export const translations = {
       monthlyIncomeExpense: "Monthly Income and Expenses",
       notFoundPage: "404 - Page not found",
       notAvailable: "N/A",
+      backToHome: "Back to Home",
+      privacyTitle: "Privacy Policy",
+      privacyLastUpdated: "Last updated",
+      privacyIntro:
+        "This app stores financial data only in your browser.",
+      privacyStoredData: "Data stored locally",
+      privacyStoredDataText:
+        "savedReports, income, expenses, and language are saved in browser LocalStorage.",
+      privacySharing: "Data sharing",
+      privacySharingText:
+        "We do not send your data to our own backend server in this project version.",
+      privacyResponsibility: "Your responsibility",
+      privacyResponsibilityText:
+        "If you use a shared computer, clear browser data when you finish.",
     },
   },
 };
 
 export const t = (language = "en", path = "") => {
   const source = translations[language] || translations.en;
-  return path
-    .split(".")
-    .reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : null), source) || path;
+  return (
+    path
+      .split(".")
+      .reduce(
+        (acc, part) => (acc && acc[part] !== undefined ? acc[part] : null),
+        source,
+      ) || path
+  );
 };

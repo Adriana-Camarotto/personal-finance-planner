@@ -3,23 +3,23 @@ import { Link } from "react-router-dom";
 import { Container, Box, Typography, Button } from "@mui/material";
 import ParticlesCursor from "../reusabel/ParticlesCursor";
 import { Grid } from "@mui/system";
-import { t, getMonthLabel } from '../i18n';
+import { t, getMonthLabel } from "../i18n";
 
 const SavedReportsPage = ({
   savedReports = [],
   deleteReport,
   duplicateReport,
-  language = 'en',
+  language = "en",
 }) => {
   return (
     <Container>
       <Box sx={{ textAlign: "center", marginTop: 4 }}>
         <Typography variant="h1" sx={{ m: "2rem 0 3rem" }}>
-          {t(language, 'header.savedReports')}
+          {t(language, "header.savedReports")}
         </Typography>
         <Box sx={{ marginTop: 4 }}>
           {savedReports.length === 0 ? (
-            <Typography variant="h6">{t(language, 'common.noData')}</Typography>
+            <Typography variant="h6">{t(language, "common.noData")}</Typography>
           ) : (
             <Grid container justifyContent="center" spacing={1}>
               {savedReports.map((report) => (
@@ -47,7 +47,7 @@ const SavedReportsPage = ({
                     <Typography variant="h6">
                       {report.month && report.year
                         ? `${getMonthLabel(report.month, language)} ${report.year}`
-                        : t(language, 'common.reportLabel')}
+                        : t(language, "common.reportLabel")}
                     </Typography>
                   </Link>
                   <Box sx={{ display: "flex", gap: 2 }}>
@@ -56,14 +56,14 @@ const SavedReportsPage = ({
                       color="secondary"
                       onClick={() => deleteReport(report.id)}
                     >
-                      {t(language, 'common.delete')}
+                      {t(language, "common.delete")}
                     </Button>
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={() => duplicateReport(report.id)}
                     >
-                      {t(language, 'common.duplicate')}
+                      {t(language, "common.duplicate")}
                     </Button>
                   </Box>
                 </Box>
@@ -93,7 +93,7 @@ const SavedReportsPage = ({
             },
           }}
         >
-          {t(language, 'common.createNewReport')}
+          {t(language, "common.createNewReport")}
         </Button>
       </Link>
 

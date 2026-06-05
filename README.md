@@ -54,6 +54,12 @@ Runs the app in development mode.
 
 Runs the test runner in interactive mode.
 
+Use this variant for one-off runs (CI-style):
+
+```bash
+npm test -- --watchAll=false
+```
+
 ### npm run build
 
 Builds the production bundle in the build folder.
@@ -71,6 +77,22 @@ You can switch the interface language from the header language button, next to t
 
 The selected language is persisted in the browser.
 
+## Deployment Notes
+
+When deployed, anyone with the URL can use the app.
+
+This project currently has no backend or authentication layer. All data remains client-side only.
+
+## Data Privacy and Storage
+
+Data is stored in each user's own browser LocalStorage, scoped by origin (domain) and browser profile.
+
+That means:
+
+- Users on different devices/browsers do not automatically share data.
+- Your data is not uploaded to a server in the current architecture.
+- Data can be removed if browser/site storage is cleared.
+
 ## Data Persistence
 
 Data is stored in LocalStorage.
@@ -81,3 +103,19 @@ Keys used:
 - income
 - expenses
 - language
+
+## Troubleshooting
+
+### Deprecation warning: punycode
+
+You may see a Node deprecation warning related to punycode while running tests.
+
+This is a transitive dependency warning from tooling in react-scripts and does not block app usage or test execution.
+
+### CRA/Babel warning for private property plugin
+
+If you see a warning mentioning @babel/plugin-proposal-private-property-in-object, install it as a dev dependency:
+
+```bash
+npm install -D @babel/plugin-proposal-private-property-in-object
+```
