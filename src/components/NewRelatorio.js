@@ -18,7 +18,7 @@ import Grid from "@mui/material/Grid2";
 import ParticlesConfetti from "../reusabel/ParticlesConfetti";
 import { t, getMonthOptions, getMonthLabel } from "../i18n";
 
-const NewRelatorio = ({ language = "en" }) => {
+const NewRelatorio = ({ language = "en", setSavedReports }) => {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [income, setIncome] = useState([]);
@@ -108,7 +108,11 @@ const NewRelatorio = ({ language = "en" }) => {
 
     const savedReports = JSON.parse(localStorage.getItem("savedReports")) || [];
     const updatedReports = [...savedReports, newReport];
-    localStorage.setItem("savedReports", JSON.stringify(updatedReports));
+    if (setSavedReports) {
+      setSavedReports(updatedReports);
+    } else {
+      localStorage.setItem("savedReports", JSON.stringify(updatedReports));
+    }
     setOpenSnackbar(true);
   };
 

@@ -47,6 +47,7 @@ const App = () => {
           <Box component="main" sx={{ flex: 1 }}>
             <AppRoutes
               savedReports={savedReports}
+              setSavedReports={setSavedReports}
               deleteReport={deleteReport}
               duplicateReport={duplicateReport}
               language={language}

@@ -12,12 +12,13 @@ const AppRoutes = ({
   deleteReport,
   duplicateReport,
   language,
+  setSavedReports,
 }) => (
   <Routes>
     <Route path="/" element={<Home language={language} />} />
     <Route
       path="/new-relatorio"
-      element={<NewRelatorio language={language} />}
+      element={<NewRelatorio language={language} setSavedReports={setSavedReports} />}
     />
     <Route
       path="/saved-reports"
