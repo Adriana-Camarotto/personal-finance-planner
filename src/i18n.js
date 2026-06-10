@@ -224,6 +224,7 @@ export const translations = {
       privacyResponsibility: "Sua responsabilidade",
       privacyResponsibilityText:
         "Se voce usar computador compartilhado, limpe os dados do navegador ao finalizar.",
+      monthYearRequired: "Por favor, selecione o mes e o ano antes de salvar.",
     },
   },
   en: {
@@ -290,6 +291,7 @@ export const translations = {
       privacyResponsibility: "Your responsibility",
       privacyResponsibilityText:
         "If you use a shared computer, clear browser data when you finish.",
+      monthYearRequired: "Please select month and year before saving.",
     },
   },
 };

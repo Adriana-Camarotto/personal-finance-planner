@@ -24,6 +24,7 @@ const NewRelatorio = ({ language = "en", setSavedReports }) => {
   const [income, setIncome] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [showConfetti, setShowConfetti] = useState(false);
 
   useEffect(() => {
@@ -98,6 +99,12 @@ const NewRelatorio = ({ language = "en", setSavedReports }) => {
   };
 
   const saveReport = () => {
+    if (!month || !year) {
+      setErrorMessage(t(language, "common.monthYearRequired"));
+      setTimeout(() => setErrorMessage(""), 5000);
+      return;
+    }
+
     const newReport = {
       id: Date.now(),
       month,
@@ -113,6 +120,7 @@ const NewRelatorio = ({ language = "en", setSavedReports }) => {
     } else {
       localStorage.setItem("savedReports", JSON.stringify(updatedReports));
     }
+    setErrorMessage("");
     setOpenSnackbar(true);
   };
 
@@ -281,9 +289,21 @@ const NewRelatorio = ({ language = "en", setSavedReports }) => {
               <Typography variant="body1">{`${t(language, "common.totalGeneral")}: £ ${totalGeneral.toFixed(2)}`}</Typography>
             </Box>
             <Box sx={{ mt: 2 }}>
-              <Button variant="contained" onClick={saveReport}>
+              <Button
+                variant="contained"
+                onClick={saveReport}
+                disabled={!month || !year}
+              >
                 {t(language, "common.saveReport")}
               </Button>
+              {errorMessage && (
+                <Alert
+                  severity="error"
+                  sx={{ mt: 2 }}
+                >
+                  {errorMessage}
+                </Alert>
+              )}
               <Snackbar
                 open={openSnackbar}
                 autoHideDuration={6000}

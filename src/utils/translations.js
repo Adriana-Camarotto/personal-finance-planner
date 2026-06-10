@@ -40,6 +40,7 @@ export const translations = {
       saveReport: "Salvar Relatório",
       reportSaved: "Relatório salvo com sucesso!",
       reportNotFound: "Relatório não encontrado",
+      monthYearRequired: "Por favor, selecione o mês e o ano antes de salvar.",
     },
 
     // Forms
@@ -134,6 +135,7 @@ export const translations = {
       saveReport: "Save Report",
       reportSaved: "Report saved successfully!",
       reportNotFound: "Report not found",
+      monthYearRequired: "Please select month and year before saving.",
     },
 
     // Forms
@@ -228,6 +230,7 @@ export const translations = {
       saveReport: "Save Report",
       reportSaved: "Report saved successfully!",
       reportNotFound: "Report not found",
+      monthYearRequired: "Please select month and year before saving.",
     },
 
     // Forms
