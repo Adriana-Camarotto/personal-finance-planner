@@ -27,20 +27,6 @@ const NewRelatorio = ({ language = "en", setSavedReports }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showConfetti, setShowConfetti] = useState(false);
 
-  useEffect(() => {
-    const savedIncome = JSON.parse(localStorage.getItem("income")) || [];
-    const savedExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
-    setIncome(savedIncome);
-    setExpenses(savedExpenses);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("income", JSON.stringify(income));
-  }, [income]);
-
-  useEffect(() => {
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses]);
 
   const handleMonthChange = (event) => {
     setMonth(event.target.value);
